@@ -1,0 +1,4 @@
+<!-- <a href="#features" class="text-xl bg-white text-gray-800 py-2 px-4 rounded">Sign Up / Login</a> -->
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
