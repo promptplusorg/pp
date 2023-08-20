@@ -56,10 +56,19 @@
 }
 
 .gradient-text {
+    background: linear-gradient(90deg, #7209d4, #2832d4 33%, #00a5b2);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 40px;
+}
+
+
+/* 
+.gradient-text {
     background: linear-gradient(to right, var(--color-gradient-1), var(--color-gradient-2), var(--color-gradient-3), var(--color-gradient-4), var(--color-gradient-5), var(--color-gradient-6));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
+} */
 
 /* Current Gradient Text Class */
 .gradient-text-blue {
