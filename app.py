@@ -1,3 +1,4 @@
+from .sandbox import get_file_list
 from .utilities import convert_size
 from .views import fetch_files_from_drive
 from .drive_operations import upload_file_to_drive
@@ -89,23 +90,11 @@ def callback(request: Request, code: str):
     return RedirectResponse(url="/landing/")
 
 
-@app.get("/files/")
-async def list_files_route(request: Request):
-    token = r.get(request.session["token"]["token"])
-    print("token", token)
-    fetched_data = json.loads(token)
-    for i in fetched_data.keys():
-        print(i, fetched_data[i])
-    if not fetched_data:
-        return RedirectResponse('/login')
-    return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
-
-
 @app.get("/landing/")
 async def landing_page(request: Request):
     credentials = get_credentials_from_session(request.session)
-    # if not credentials:
-    #     return RedirectResponse(url="/login/")
+    if not credentials:
+        return RedirectResponse(url="/login/")
     return templates.TemplateResponse("landing.html", {"request": request})
 
 
@@ -131,14 +120,37 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
 
 @app.get("/files/")
 async def list_files_route(request: Request):
-    token = r.get(request.session["token"]["token"])
-    print("token", token)
-    fetched_data = json.loads(token)
-    for i in fetched_data.keys():
-        print(i, fetched_data[i])
-    if not fetched_data:
-        return RedirectResponse('/login')
-    return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
+
+    try:
+        # if token:
+        token = r.get(request.session["token"]["token"])
+        print("token", token)
+        fetched_data = json.loads(token)
+        print("fetched_data")  # , fetched_data
+        for i in fetched_data.keys():
+            print(i, fetched_data[i])
+        return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
+
+    except:
+
+        # if not fetched_data:
+        # if not token:
+        # return RedirectResponse('/login')
+
+        items = get_file_list()
+        total_size = sum([s['size'] for s in items])
+
+        fetched_data = {
+            "items": items,
+            "user_name": "user_name",
+            "user_email": "user_email",
+            "root_folders_count": 0,
+            "total_subfolders_count": 0,
+            "total_files": len(items),
+            "total_size": total_size,
+            "elapsed_time": 0,
+        }
+        return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
 
 
 @app.post("/contact", response_class=HTMLResponse)
