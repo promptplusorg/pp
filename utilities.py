@@ -6,8 +6,12 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 load_dotenv()
 
-path_to_sandbox_folder = '/kim/pp/sandbox/'
-file_list_in_sandbox = os.listdir(path_to_sandbox_folder)
+
+def refresh_file():
+    path_to_sandbox_folder = '/kim/pp/sandbox/'
+    file_list_in_sandbox = os.listdir(path_to_sandbox_folder)
+    return path_to_sandbox_folder, file_list_in_sandbox
+
 
 # REDIRECT_URI = "https://linkpay.to/login/callback"
 REDIRECT_URI = "https://promptpl.us/login/callback"

@@ -3,9 +3,12 @@ def get_file_list():
     import os
     import datetime
 
-    from .utilities import path_to_sandbox_folder
-    # could move to utilies.py into here
-    from .utilities import file_list_in_sandbox
+    # from .utilities import path_to_sandbox_folder
+    # # could move to utilies.py into here
+    # from .utilities import file_list_in_sandbox
+
+    from .utilities import refresh_file
+    path_to_sandbox_folder, file_list_in_sandbox = refresh_file()
 
     file_info_list = []
     for file_name in file_list_in_sandbox:

@@ -136,8 +136,6 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
 @app.get("/files/")
 async def list_files_route(request: Request):
 
-    from .chat import chat, embbding
-
     try:
         # if token:
         token = r.get(request.session["token"]["token"])
@@ -148,37 +146,44 @@ async def list_files_route(request: Request):
             print(i, fetched_data[i])
 
         # we still cannot send file to emdding directly as we need to download the files first
-        frl = [f.name for f in items if f.mimeType !=
-               "application/vnd.google-apps.folder"]
-        print("frl", frl_)
+        print("frl")
+        frl = [f['name'] if f['mimeType'] !=
+               "application/vnd.google-apps.folder" else None for f in fetched_data['items']]
+        # for f in fetched_data['items']:
+        #     print(type(f))
+        #     print(f['name'], f['mimeType'])
+        # print("f", f)
+        print("frl", frl)
         # frl_ = download_from_gd(frl)
         # embbding(frl_)
-
         return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
 
     except:
+
+        # from .chat import chat, embbding
 
         # if not fetched_data:
         # if not token:
         # return RedirectResponse('/login')
 
-        items = get_file_list()
+        items_ = get_file_list()
+        print("items_", items_)
         # embbding([f['name'] for f in items])
 
         # from .utilities import file_list_in_sandbox
         # embbding(file_list_in_sandbox)
 
-        fetched_data = {
-            "items": items,
+        fetched_data_ = {
+            "items": items_,
             "user_name": "user_name",
             "user_email": "user_email",
             "root_folders_count": 0,
             "total_subfolders_count": 0,
-            "total_files": len(items),
-            "total_size": sum([s['size'] for s in items]),
+            "total_files": len(items_),
+            "total_size": sum([s['size'] for s in items_]),
             "elapsed_time": 0,
         }
-        return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
+        return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data_})
 
 
 @app.post("/contact", response_class=HTMLResponse)
@@ -271,10 +276,13 @@ async def websocket_endpoint(websocket: WebSocket):
         from dotenv import load_dotenv
         load_dotenv()
         ok = os.getenv('openai')
+        os.environ["OPENAI_API_KEY"] = ok
         elon_musk_bot = App()
 
-        from .utilities import path_to_sandbox_folder
-        from .utilities import file_list_in_sandbox
+        # from .utilities import path_to_sandbox_folder
+        # from .utilities import file_list_in_sandbox
+        from .utilities import refresh_file
+        path_to_sandbox_folder, file_list_in_sandbox = refresh_file()
 
         for i, file_name in enumerate(file_list_in_sandbox):
             file_path = os.path.join(path_to_sandbox_folder, file_name)
