@@ -108,6 +108,57 @@
             </div>
         </div>
     </div>
+
+
+    <div id="logs"></div>
+    <div class="p-5"><input id="text" type="text"><button id="scanDriveBtn" class="btn btn-primary">Send</button></div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // const socket = new WebSocket(`wss://linkpay.to/ws`);
+            const socket = new WebSocket(`wss://promptpl.us/chat`);
+
+            socket.onopen = (event) => {
+                console.log("WebSocket Connected");
+            };
+
+            socket.onmessage = async (event) => {
+                const logDiv = document.getElementById("logs");
+                // logDiv.innerHTML += `<p>${event.data}</p>`;
+                logDiv.innerHTML += `<p>${event.data.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`;
+                console.log(event.data);  // Added for debugging
+
+                if (event.data === "Fetching completed!") {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    window.location.href = "/files/";
+                }
+            };
+
+            socket.onclose = (event) => {
+                if (event.wasClean) {
+                    console.log(`Connection closed cleanly, code=${event.code}, reason=${event.reason}`);
+                } else {
+                    console.log('Connection died');
+                }
+            };
+
+            socket.onerror = (error) => {
+                console.error(`Error: ${error.message}`);
+            };
+
+            document.getElementById("scanDriveBtn").addEventListener("click", function () {
+                socket.send(document.getElementById("text").value);
+            });
+        });
+    </script>
+
+
+
+
+
+
 </body>
 
 </html>

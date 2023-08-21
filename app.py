@@ -102,7 +102,22 @@ async def landing_page(request: Request):
 async def upload_file(request: Request, file: UploadFile = File(...)):
     credentials = get_credentials_from_session(request.session)
     if not credentials:
-        return RedirectResponse(url="/login/")
+
+        folder_name = "/kim/pp/sandbox"
+        file_path = os.path.join(folder_name, file.filename)
+
+        # if not os.path.exists(folder_name):
+        #     os.mkdir(folder_name)
+
+        with open(file_path, "wb") as f:
+            f.write(file.file.read())
+
+        data_dict = {"request": request,
+                     "file_id": "sandbox",
+                     "file_name": file.filename}
+        return templates.TemplateResponse("upload_success.html", data_dict)
+        # return RedirectResponse(url="/login/")
+
     drive_service = build("drive", "v3", credentials=credentials)
     file_id = await upload_file_to_drive(drive_service, file)
     return templates.TemplateResponse("upload_success.html", {"request": request, "file_id": file_id})
@@ -201,6 +216,63 @@ async def websocket_endpoint(websocket: WebSocket):
                 else:
                     logging.warning(
                         "No file data received from fetch_files_from_drive function.")
+
+    except WebSocketDisconnect as e:
+        logging.warning(f"WebSocket disconnected with code: {e.code}")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        # This will log the full traceback of the exception
+        logging.error(traceback.format_exc())
+        await websocket.send_text(f"Error: {e}")
+
+
+@app.websocket("/chat")
+async def websocket_endpoint(websocket: WebSocket):
+
+    await websocket.accept()
+    print("websocket.accept() accepted")
+
+    # session = websocket.scope.get("session")
+    # print('websocket.scope.get("session")', session)
+
+    # session_token = session.get("token")
+    # print("session_token", session_token)
+
+    # if not session_token:
+    #     # logging.warning("WebSocket connection attempt without session token.")
+    #     await websocket.close(code=1003)  # Forbidden
+    #     print("websocket.close(code=1003) no session_token")
+    #     return
+
+    logging.info("WebSocket connection established.")
+    await websocket.send_text("WebSocket Connected")
+
+    try:
+        
+        from .chat import chat, embbding
+        embbding()
+
+        while True:
+            data = await websocket.receive_text()
+            logging.info(f"Received WebSocket message: {data}")
+
+            # if data == "start":
+            #     logging.info("Starting file fetch process...")
+            #     await websocket.send_text("Fetching files...")
+
+            prompt = "<promptpl.us>"+data
+            print(prompt)
+            await websocket.send_text(prompt)
+
+            # do some lang chain here now
+            text = "How many companies does Elon Musk run?"
+            text = data
+            res = "error"
+            try:
+                # res = chat(text)
+                await websocket.send_text(res)
+            except:
+                await websocket.send_text(res)
 
     except WebSocketDisconnect as e:
         logging.warning(f"WebSocket disconnected with code: {e.code}")
