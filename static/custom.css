@@ -3,9 +3,11 @@
     --color-gradient-2: #2121e2;
     --color-gradient-3: #00fff0;
     --color-gradient-4: #8785FF;
-    --color-gradient-5: #FF76B8;
-    --color-gradient-6: #001AFF;
+    --color-gradient-5: #FAFF00;
+    --color-gradient-6: #00F37F;
 }
+
+/* #00F37F */
 
 .colorBackground {
     left: 50%;

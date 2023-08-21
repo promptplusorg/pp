@@ -1,0 +1,144 @@
+<html>
+
+<head>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+
+    <script src="{{ url_for('static', path='/html2canvas.js') }}"></script>
+    <!-- <link href="{{ url_for('static', path='/output.css') }}" rel="stylesheet"> -->
+    <!-- <link href="{{ url_for('static', path='/custom.css') }}" rel="stylesheet"> -->
+
+
+</head>
+
+<body>
+
+
+
+    <!-- <div class="colorBackground absolute"></div>
+    <div class="colorBackgroundBottom absolute"></div> -->
+
+    <!-- <nav class="p-4 text-white shadow-md sticky top-0 z-50 bg-gradient-to-r from-blue-500 to-red-400"> -->
+
+    <!-- <nav class="p-4 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto grid grid-cols-3 gap-4 items-center">
+            <div class="space-x-4">
+                <a href="#home" class="text-white font-bold hover:text-yellow-500 transition duration-300">Home</a>
+                <a href="#features"
+                    class="text-white font-bold hover:text-yellow-500 transition duration-300">Features</a>
+                <a href="#vision" class="text-white font-bold hover:text-yellow-500 transition duration-300">Vision</a>
+                <a href="#about" class="text-white font-bold hover:text-yellow-500 transition duration-300">About</a>
+            </div> -->
+
+    <!-- style="height: 100vh" -->
+
+    <div class="container mx-auto grid grid-cols-3" style="height: 9vh">
+
+        <!-- <div style="height: 100vh"> -->
+
+        <div class="text-center" id="capture">
+            <!-- <h1 class="text-4xl font-bold text-yellow-400">Prompt<span class="gradient-text-mixed">Pl.us</span></h1> -->
+
+            <!-- <h1 class="text-4xl font-bold text-yellow-400">Prompt
+                <span class="text-green-400">Pl.us</span>
+            </h1> -->
+
+            <!-- <span class="text-yellow-400">Prompt</span> -->
+
+            <!-- <span class="text-blue-400 font-extrabold">&lt;</span>Prompt<span class="text-green-400">Pl.us</span><span class="text-blue-400 font-extrabold">&gt;</span> -->
+
+            <a href="https://promptpl.us" class="text-yellow-400 font-bold text-4xl">
+                <span class="text-red-400 font-extrabold">&lt;</span>prompt<span
+                    class="text-green-400">pl.us</span><span class="text-blue-400 font-extrabold">/&gt;</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- <div class="flex justify-end gap-2">
+                <a href="{{ authorization_url }}"
+                    class="bg-yellow-500 hover:bg-blue-500 text-white text-bold p-2 rounded">
+                    Sign Up
+                </a>
+                <a href="{{ authorization_url }}"
+                    class="bg-green-500 hover:bg-blue-500 text-white text-bold p-2 rounded">
+                    Log in
+                </a>
+            </div>
+        </div>
+    </nav> -->
+
+    <!-- <img src="https://codepedia.info/mediaUpload/article/jquery-html-to-image-convert_637405416427477031.jpg" style="width: 100px;height:100px;" /> -->
+
+    <!-- <center>
+        <div id="html-content-holder" style="background-color: #F0F0F1; color: #00cc65; width: 500px; margin:20px;
+        padding:25px;">
+        
+            <h2 style="color: #3e4b51;">
+                Html to canvas, and canvas to proper image
+            </h2>
+
+            <div style="float: left;width:110x;padding-left:10px" >
+                <img  src="https://dummyimage.com/100x100/000/fff"
+                style="width: 100px;height:100px;" />
+            </div>
+
+            <div style="float: left;width:110x;padding-left:10px" >
+                <img  src="https://dummyimage.com/100x100/000/fff"
+                style="width: 100px;height:100px;" />
+            </div>
+          
+            <p style="color: #3e4b51;">
+                <b>Codepedia.info</b> is a programming blog. Tutorials focused on Programming ASP.Net,
+                C#, jQuery, AngularJs, Gridview, MVC, Ajax, Javascript, XML, MS SQL-Server, NodeJs,
+                Web Design, Software
+            </p>
+    
+        </div>
+    </center> -->
+
+    <!-- <input id="btn_convert" type="button" value="Convert to Image" />
+
+    <br />
+    <h3>Preview :</h3>
+    <div id="previewImg">
+    </div>
+ -->
+
+
+    <script>
+        // import html2canvas from 'html2canvas';
+
+        // html2canvas(document.body).then(function (canvas) {
+        //     document.body.appendChild(canvas);
+        // });
+
+        html2canvas(document.querySelector("#capture")).then(canvas => {
+            document.body.appendChild(canvas)
+        });
+
+        // document.getElementById("btn_convert").addEventListener("click", function () {
+        //     html2canvas(document.getElementById("html-content-holder"),
+        //         {
+        //             allowTaint: true,
+        //             useCORS: true
+        //         }).then(function (canvas) {
+        //             var anchorTag = document.createElement("a");
+        //             document.body.appendChild(anchorTag);
+        //             document.getElementById("previewImg").appendChild(canvas);
+        //             anchorTag.download = "filename.jpg";
+        //             anchorTag.href = canvas.toDataURL();
+        //             anchorTag.target = '_blank';
+        //             anchorTag.click();
+        //         });
+        // });
+
+    </script>
+
+</body>
+
+</html>

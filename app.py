@@ -1,26 +1,186 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from .utilities import convert_size
+from .views import fetch_files_from_drive
+from .drive_operations import upload_file_to_drive
+from .google_auth_helpers import flow, credentials_to_dict, get_credentials_from_session
+from googleapiclient.discovery import build
+from starlette.websockets import WebSocketDisconnect
+from starlette.middleware.sessions import SessionMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
+from fastapi import FastAPI, Depends, Request, File, UploadFile, WebSocket, HTTPException
+import logging
+import datetime
+import traceback
+import redis
+import json
+import os
+
+# Logging Configuration
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.info("Logging is set up and working correctly.")
+
+
+# Initialize Redis client
+r = redis.Redis(host='192.168.1.99', port=6379, db=0)
+print(r)
+
+# # Setup in-memory session backend
+# session_backend = InMemorySessionBackend()
+
+# # Setting up templates for rendering HTML
+# templates = Jinja2Templates(directory="templates")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print("BASE_DIR", BASE_DIR)
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+print("TEMPLATE_DIR", TEMPLATE_DIR)
+templates = Jinja2Templates(directory=TEMPLATE_DIR)
+# templates = Jinja2Templates(directory="pp/templates")
+print("templates", templates)
+templates.env.filters["convert_size"] = convert_size
 
 app = FastAPI()
+SECRET_KEY = "your-secret-key"
+ALGORITHM = "HS256"
+
+# Middleware for session management
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 # app.mount("/", StaticFiles(directory="site", html=True), name="site")
-
 app.mount("/static", StaticFiles(directory="pp/static"), name="static")
-
-templates = Jinja2Templates(directory="pp/templates")
 
 # @app.get("/items/{id}", response_class=HTMLResponse)
 # async def read_item(request: Request, id: str):
 #     return templates.TemplateResponse("item.html", {"request": request, "id": id})
 
 
+@app.get("/logo", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("logo.html", {"request": request})
+
+
+@app.get("/termsofservice", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("tos.html", {"request": request})
+
+
+@app.get("/privacypolicy", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("pp.html", {"request": request})
+
+
 @app.get("/", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def index(request: Request):
+
+    """Route to initiate Google OAuth2 login."""
+    authorization_url, _ = flow.authorization_url(prompt="consent")
+
+    return templates.TemplateResponse("index.html", {"request": request, "authorization_url": authorization_url})
 
 
-@app.get("/contact", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/login/")
+def login(request: Request):
+    """Route to initiate Google OAuth2 login."""
+    authorization_url, _ = flow.authorization_url(prompt="consent")
+    return RedirectResponse(authorization_url)
+
+
+@app.get("/login/callback/")
+def callback(request: Request, code: str):
+    """Callback route after successful Google OAuth2 authentication."""
+    flow.fetch_token(code=code)
+    credentials = flow.credentials
+    request.session["token"] = credentials_to_dict(credentials)
+    return RedirectResponse(url="/landing/")
+
+
+@app.get("/files/")
+async def list_files_route(request: Request):
+    token = r.get(request.session["token"]["token"])
+    print("token", token)
+    fetched_data = json.loads(token)
+    for i in fetched_data.keys():
+        print(i, fetched_data[i])
+    if not fetched_data:
+        return RedirectResponse('/login')
+    return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
+
+
+@app.get("/landing/")
+async def landing_page(request: Request):
+    credentials = get_credentials_from_session(request.session)
+    if not credentials:
+        return RedirectResponse(url="/login/")
+    return templates.TemplateResponse("landing.html", {"request": request})
+
+
+@app.post("/upload/")
+async def upload_file(request: Request, file: UploadFile = File(...)):
+    credentials = get_credentials_from_session(request.session)
+    if not credentials:
+        return RedirectResponse(url="/login/")
+    drive_service = build("drive", "v3", credentials=credentials)
+    file_id = await upload_file_to_drive(drive_service, file)
+    return templates.TemplateResponse("upload_success.html", {"request": request, "file_id": file_id})
+
+
+# @app.get("/landing/")
+# async def landing_page_route(request: Request):
+#     """Landing page after successful login."""
+#     return await landing_page(request)
+
+
+# @app.post("/upload/")
+# async def upload_file_route(request: Request, file: UploadFile = File(...)):
+#     """Route to upload a file to Google Drive."""
+#     return await upload_file(request, file)
+
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+
+    session = websocket.scope.get("session")
+    print('websocket.scope.get("session")', session)
+    session_token = session.get("token")
+
+    if not session_token:
+        logging.warning("WebSocket connection attempt without session token.")
+        await websocket.close(code=1003)  # Forbidden
+        return
+
+    logging.info("WebSocket connection established.")
+    await websocket.send_text("WebSocket Connected")
+
+    try:
+        while True:
+            data = await websocket.receive_text()
+            logging.info(f"Received WebSocket message: {data}")
+
+            if data == "start":
+                logging.info("Starting file fetch process...")
+                await websocket.send_text("Fetching files...")
+
+                file_data = await fetch_files_from_drive(websocket.scope.get("session"), websocket)
+                print('file_data', file_data)
+
+                if file_data:
+                    r.set(session_token['token'], json.dumps(file_data))
+                    total_files = file_data.get("total_files", 0)
+                    fetched_files = f"Fetched {total_files} files from Google Drive."
+                    logging.info(fetched_files)
+                    await websocket.send_text(fetched_files)
+                    await websocket.send_text(f"Fetched {total_files} files.")
+                else:
+                    logging.warning(
+                        "No file data received from fetch_files_from_drive function.")
+
+    except WebSocketDisconnect as e:
+        logging.warning(f"WebSocket disconnected with code: {e.code}")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        # This will log the full traceback of the exception
+        logging.error(traceback.format_exc())
+        await websocket.send_text(f"Error: {e}")
