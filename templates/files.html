@@ -126,8 +126,10 @@
 
             socket.onmessage = async (event) => {
                 const logDiv = document.getElementById("logs");
-                // logDiv.innerHTML += `<p>${event.data}</p>`;
-                logDiv.innerHTML += `<p>${event.data.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`;
+                logDiv.innerHTML += `<p>${event.data}</p>`;
+
+                // logDiv.innerHTML += `<p>${event.data.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`;
+                
                 console.log(event.data);  // Added for debugging
 
                 if (event.data === "Fetching completed!") {

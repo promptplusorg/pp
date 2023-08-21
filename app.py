@@ -1,4 +1,4 @@
-from .sandbox import get_file_list
+from .file_list import get_file_list
 from .utilities import convert_size
 from .views import fetch_files_from_drive
 from .drive_operations import upload_file_to_drive
@@ -136,6 +136,8 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
 @app.get("/files/")
 async def list_files_route(request: Request):
 
+    from .chat import chat, embbding
+
     try:
         # if token:
         token = r.get(request.session["token"]["token"])
@@ -144,6 +146,14 @@ async def list_files_route(request: Request):
         print("fetched_data")  # , fetched_data
         for i in fetched_data.keys():
             print(i, fetched_data[i])
+
+        # we still cannot send file to emdding directly as we need to download the files first
+        frl = [f.name for f in items if f.mimeType !=
+               "application/vnd.google-apps.folder"]
+        print("frl", frl_)
+        # frl_ = download_from_gd(frl)
+        # embbding(frl_)
+
         return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
 
     except:
@@ -153,7 +163,10 @@ async def list_files_route(request: Request):
         # return RedirectResponse('/login')
 
         items = get_file_list()
-        total_size = sum([s['size'] for s in items])
+        # embbding([f['name'] for f in items])
+
+        # from .utilities import file_list_in_sandbox
+        # embbding(file_list_in_sandbox)
 
         fetched_data = {
             "items": items,
@@ -162,7 +175,7 @@ async def list_files_route(request: Request):
             "root_folders_count": 0,
             "total_subfolders_count": 0,
             "total_files": len(items),
-            "total_size": total_size,
+            "total_size": sum([s['size'] for s in items]),
             "elapsed_time": 0,
         }
         return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
@@ -248,9 +261,29 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.send_text("WebSocket Connected")
 
     try:
-        
-        from .chat import chat, embbding
-        embbding()
+
+        # from .chat import chat, embbding
+        # from .utilities import file_list_in_sandbox
+        # elon_musk_bot = embbding(file_list_in_sandbox)
+        # # embbding([f['name'] for f in items])
+
+        from embedchain import App
+        from dotenv import load_dotenv
+        load_dotenv()
+        ok = os.getenv('openai')
+        elon_musk_bot = App()
+
+        from .utilities import path_to_sandbox_folder
+        from .utilities import file_list_in_sandbox
+
+        for i, file_name in enumerate(file_list_in_sandbox):
+            file_path = os.path.join(path_to_sandbox_folder, file_name)
+            try:
+                print(i+1, file_path)
+                elon_musk_bot.add(file_path, data_type='pdf_file')
+                print(i+1, "added")
+            except:
+                pass
 
         while True:
             data = await websocket.receive_text()
@@ -261,7 +294,7 @@ async def websocket_endpoint(websocket: WebSocket):
             #     await websocket.send_text("Fetching files...")
 
             prompt = "<promptpl.us>"+data
-            print(prompt)
+            print("prompt", prompt)
             await websocket.send_text(prompt)
 
             # do some lang chain here now
@@ -269,7 +302,11 @@ async def websocket_endpoint(websocket: WebSocket):
             text = data
             res = "error"
             try:
+                print("text", text)
                 # res = chat(text)
+                # do you have embed files?
+                res = elon_musk_bot.query(text)
+                print("res", res)
                 await websocket.send_text(res)
             except:
                 await websocket.send_text(res)

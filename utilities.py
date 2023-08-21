@@ -6,10 +6,15 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 load_dotenv()
 
+path_to_sandbox_folder = '/kim/pp/sandbox/'
+file_list_in_sandbox = os.listdir(path_to_sandbox_folder)
+
 # REDIRECT_URI = "https://linkpay.to/login/callback"
 REDIRECT_URI = "https://promptpl.us/login/callback"
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+
+# beware folder path
 
 MAX_DEPTH = 3
 # Function to convert bytes to a human-readable format
