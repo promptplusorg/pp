@@ -1,12 +1,15 @@
 import os
+import pytz
 import math
 import tempfile
 from datetime import datetime, timezone
-import pytz
+from dotenv import load_dotenv
+load_dotenv()
 
-CLIENT_ID = "173067898019-9clcusn9ljf933e597k1aorar5jirlor.apps.googleusercontent.com"
-CLIENT_SECRET = "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"
-REDIRECT_URI = "https://linkpay.to/login/callback"
+# REDIRECT_URI = "https://linkpay.to/login/callback"
+REDIRECT_URI = "https://promptpl.us/login/callback"
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 MAX_DEPTH = 3
 # Function to convert bytes to a human-readable format

@@ -14,7 +14,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const socket = new WebSocket(`wss://linkpay.to/ws`);
+            // const socket = new WebSocket(`wss://linkpay.to/ws`);
+            const socket = new WebSocket(`wss://promptpl.us/ws`);
 
             socket.onopen = (event) => {
                 console.log("WebSocket Connected");

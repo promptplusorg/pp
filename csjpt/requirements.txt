@@ -19,3 +19,4 @@ openai
 transformers
 sentencepiece
 sacremoses
+python-dotenv

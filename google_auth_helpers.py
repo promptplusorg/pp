@@ -40,6 +40,8 @@ def credentials_to_dict(credentials):
 def get_credentials_from_session(session):
     """Retrieves Google credentials from session."""
     if "token" not in session:
+        print('"token" not in session')
         return None
     creds = Credentials(**session["token"])
+    print("creds", creds)
     return creds

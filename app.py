@@ -56,11 +56,6 @@ app.mount("/static", StaticFiles(directory="pp/static"), name="static")
 #     return templates.TemplateResponse("item.html", {"request": request, "id": id})
 
 
-@app.get("/logo", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("logo.html", {"request": request})
-
-
 @app.get("/termsofservice", response_class=HTMLResponse)
 async def read_item(request: Request):
     return templates.TemplateResponse("tos.html", {"request": request})
@@ -73,10 +68,8 @@ async def read_item(request: Request):
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-
     """Route to initiate Google OAuth2 login."""
     authorization_url, _ = flow.authorization_url(prompt="consent")
-
     return templates.TemplateResponse("index.html", {"request": request, "authorization_url": authorization_url})
 
 
@@ -125,12 +118,10 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
     file_id = await upload_file_to_drive(drive_service, file)
     return templates.TemplateResponse("upload_success.html", {"request": request, "file_id": file_id})
 
-
 # @app.get("/landing/")
 # async def landing_page_route(request: Request):
 #     """Landing page after successful login."""
 #     return await landing_page(request)
-
 
 # @app.post("/upload/")
 # async def upload_file_route(request: Request, file: UploadFile = File(...)):
@@ -138,17 +129,39 @@ async def upload_file(request: Request, file: UploadFile = File(...)):
 #     return await upload_file(request, file)
 
 
+@app.get("/files/")
+async def list_files_route(request: Request):
+    token = r.get(request.session["token"]["token"])
+    print("token", token)
+    fetched_data = json.loads(token)
+    for i in fetched_data.keys():
+        print(i, fetched_data[i])
+    if not fetched_data:
+        return RedirectResponse('/login')
+    return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data})
+
+
+@app.post("/contact", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("logo.html", {"request": request})
+
+
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+
     await websocket.accept()
+    print("websocket.accept() accepted")
 
     session = websocket.scope.get("session")
     print('websocket.scope.get("session")', session)
+
     session_token = session.get("token")
+    print("session_token", session_token)
 
     if not session_token:
-        logging.warning("WebSocket connection attempt without session token.")
+        # logging.warning("WebSocket connection attempt without session token.")
         await websocket.close(code=1003)  # Forbidden
+        print("websocket.close(code=1003) no session_token")
         return
 
     logging.info("WebSocket connection established.")
