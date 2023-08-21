@@ -3,19 +3,19 @@
 
 <!-- Hero Section -->
 <section id="home" class="text-gray-600 flex items-center justify-center min-h-screen fade-in">
-    <div class="container mx-auto text-left flex flex-wrap">
+    <div class="container mx-auto text-left flex flex-wrap w-4/5">
         <div class="w-full md:w-1/2">
             <h2 class="text-5xl font-bold mb-4"><span class="gradient-text">Your DATA. Any GPT.</span></h2>
-            <p class="text-2xl mb-4">Leverage cutting-edge technologies to transform your data.<br>
+            <p class="text-xl mb-4">Leverage cutting-edge technologies to transform your data.<br>
                 Harness the power of GPT models and integrate them seamlessly.
             </p>
             <a href="#features"
                 class="bg-gradient-to-r from-yellow-400 to-pink-500 hover:from-blue-500 hover:to-cyan-500 text-white text-xl font-bold py-2 px-4 rounded">
                 Explore Features</a>
-            <a href="{{ authorization_url }}"
+            <!-- <a href="{{ authorization_url }}" -->
+            <a href="/landing"
                 class="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white text-xl font-bold py-2 px-4 rounded">
-                Get Started</a>
-
+                Sandbox</a>
         </div>
         <div class="w-full md:w-1/2">
             <img src="{{ url_for('static', path='/proto.png') }}" alt="PromptPl.us" class="w-full h-auto rounded mb-4">
@@ -69,45 +69,52 @@
 
 <!-- Vision Section -->
 <!-- bg-gradient-to-l from-purple-400 to-blue-500  text-white -->
-<section id="vision" class="p-5 text-gray-600 flex items-center justify-center min-h-screen fade-in">
-    <div class="container mx-auto flex flex-wrap-reverse justify-between appear-from-bottom">
-        <div class="w-1/2">
-            <img src="https://images.unsplash.com/photo-1557683316-973673baf926" alt="About Us Image"
-                class="w-full h-auto rounded mb-4">
-        </div>
-        <div class="w-1/2 pl-8">
-            <h3 class="text-5xl font-bold mb-4">
-                Our Vision is to make AI accessible to everyone, regardless of their technical.</h3>
-            <p class="text-2xl mb-4">
-                We aim to democratize access to cutting-edge technologies and drive innovation across
-                industries.
-                We envision a world where data-driven insights are accessible to everyone.
-                We believe in innovation, collaboration, and continuous improvement.
-                We provide cutting-edge solutions that empower individuals and organizations to harness the
-                potential of their data.
-                We empower individuals and businesses to leverage the power of GPT models.
-            </p>
-            <a href="#about" class="text-xl bg-white text-gray-600 py-2 px-4 rounded">Get in touch</a>
+<section id="about" class="text-gray-600 flex items-center justify-center min-h-screen fade-in py-0">
+    <!-- p-5  -->
+    <div class="container text-center">
+        <!-- mx-auto text-center text-gray-600 -->
+        <h2 class="text-4xl font-bold mb-16 appear-from-bottom">About Us</h2>
+
+        <div class="container mx-auto flex flex-wrap-reverse justify-between appear-from-bottom py-0">
+            <div class="w-1/2">
+                <img src="https://images.unsplash.com/photo-1557683316-973673baf926" alt="About Us Image"
+                    class="w-full h-auto rounded mb-4">
+            </div>
+            <div class="w-1/2 pl-8 text-left">
+                <h3 class="text-5xl font-bold mb-4">
+                    Our Vision is to make AI accessible to everyone, regardless of their technical.</h3>
+                <p class="text-2xl mb-4">
+                    We aim to democratize access to cutting-edge technologies and drive innovation across
+                    industries.
+                    We envision a world where data-driven insights are accessible to everyone.
+                    We believe in innovation, collaboration, and continuous improvement.
+                    We provide cutting-edge solutions that empower individuals and organizations to harness the
+                    potential of their data.
+                    We empower individuals and businesses to leverage the power of GPT models.
+                </p>
+                <a href="#about" class="text-xl bg-white text-gray-600 py-2 px-4 rounded">Get in touch</a>
+            </div>
         </div>
     </div>
 </section>
 
 
 <!-- About Section -->
-<section id="about" class="p-5 fade-in">
+<section id="about_" class="fade-in">
+    <!-- p-5  -->
     <div class="container mx-auto text-center text-gray-600">
-        <h2 class="text-4xl font-bold mb-4">About Us</h2>
-        <p class="text-xl mb-4">
-            PromptPl.us is committed to empowering businesses and individuals with cutting-edge solutions.
+        <!-- <h2 class="text-4xl font-bold mb-4">About Us</h2> -->
+        <p class="text-xl mb-16">
+            "PromptPl.us is committed to empowering businesses and individuals with cutting-edge solutions.
             We specialize in providing tailored solutions for businesses.<br>
             We are a team of passionate data scientists, engineers, and researchers who believe in the power of data
             and AI to transform businesses and lives.<br>
             Our team works closely with B2B clients to understand their unique needs and develop customized
             solutions that align with their goals.<br>
             Whether you are looking to integrate GPT models into your existing systems or seeking a bespoke
-            solution, we have the expertise to deliver.
+            solution, we have the expertise to deliver."
         </p>
-        <div class="flex flex-wrap justify-center">
+        <div class="flex flex-wrap justify-center p-5">
             <div class="w-full md:w-1/3 p-4">
                 <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb" alt="About Us"
                     class="w-full h-auto rounded mb-4">

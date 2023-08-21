@@ -104,8 +104,8 @@ async def list_files_route(request: Request):
 @app.get("/landing/")
 async def landing_page(request: Request):
     credentials = get_credentials_from_session(request.session)
-    if not credentials:
-        return RedirectResponse(url="/login/")
+    # if not credentials:
+    #     return RedirectResponse(url="/login/")
     return templates.TemplateResponse("landing.html", {"request": request})
 
 
