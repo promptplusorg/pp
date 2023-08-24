@@ -6,9 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>&lt;promptpl.us/&gt;</title>
 
-    <script src="{{ url_for('static', path='/aoc.js') }}"></script>
+    <script src="{{ url_for('static', path='/aos.js') }}"></script>
 
     <script src="{{ url_for('static', path='/afb.js') }}"></script>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', path='/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', path='/site.webmanifest') }}">
+
 
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" /> -->
 
@@ -31,7 +38,7 @@
     <nav class="shadow-md flex justify-center">
         <!-- p-5  -->
         <!-- <div class="container mx-auto grid grid-cols-3 gap-4 items-end"> pb-5 px-5-->
-        <div class="container flex justify-between items-center w-4/5">
+        <div class="container flex flex-wrap justify-between items-center w-4/5">
             <!-- gradient-text-mixed pb-5 px-5 -->
             <div class="pb-3">
                 <a href="https://promptpl.us" class="text-yellow-400 font-bold text-5xl">prompt<span
@@ -39,7 +46,7 @@
                 </a>
             </div>
 
-            <div class="w-full text-xl text-right text-gray-600 space-x-4">
+            <div class="text-xl text-right text-gray-600 space-x-4">
                 <a href="#home" class="hover:text-yellow-400 transition duration-100">Home</a>
                 <a href="#features" class="hover:text-yellow-400 transition duration-100">Features</a>
                 <!-- <a href="#vision" class="text-gray-800  hover:text-yellow-500 transition duration-300">Vision</a> -->
@@ -67,10 +74,10 @@
         <nav class="p-0 shadow-md">
             <div>.</div>
         </nav>
-        <div class="p-5 container mx-auto text-center">
+        <div class="p-5 container mx-auto text-center text-sm">
             <!-- <p class="text-xl"> -->
-            <a href="/privacypolicy">Privacy Policy</a> | <a href="/termsofservice">Terms of Service</a> |
-            All Rights Reserved © 2023 Prompt Plus Venture Co., Ltd.
+            <a href="/privacypolicy">Privacy Policy</a> | <a href="/termsofservice">Terms of Service</a><br>
+            All Rights Reserved © 2023 promptpl.us/>
             <!-- </p> -->
             <!-- &lt;promptpl.us/&gt; -->
         </div>
