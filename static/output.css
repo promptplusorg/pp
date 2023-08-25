@@ -1532,6 +1532,10 @@ video {
     display: inline-block;
   }
 
+  .sm\:w-4\/5 {
+    width: 80%;
+  }
+
   .sm\:w-auto {
     width: auto;
   }
@@ -1631,10 +1635,6 @@ video {
 
   .md\:w-2\/3 {
     width: 66.666667%;
-  }
-
-  .md\:w-4\/5 {
-    width: 80%;
   }
 
   .md\:flex-wrap {
