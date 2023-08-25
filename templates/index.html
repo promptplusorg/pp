@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% block content %}
 
-<section
+<section id="home"
     class="relative overflow-hidden bg-gradient-to-b from-blue-50 via-transparent to-transparent pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
     <div class="relative isolate z-10">
         <div
@@ -35,20 +35,20 @@
                 has been trained on the information on your website.
             </h2> -->
 
-            <h2 class="text-5xl font-bold mb-4"><span class="gradient-text">Your DATA. Any GPT.</span></h2>
+            <p class="text-3xl md:text-5xl font-bold mb-4"><span class="gradient-text">Your DATA. Any GPT.</span></p>
             <p class="text-xl text-gray-600 mb-4">Leverage cutting-edge AI tech to transform your data and<br>
                 integrate them seamelessly with you anywhere.
             </p>
 
-            <div class="flex gap-2 items-center justify-center">
+            <div class="flex gap-2 items-center justify-center text-sm md:text-lg text-white font-bold">
                 <div>
                     <a href="#features"
-                        class="bg-gradient-to-r from-yellow-400 to-pink-500 hover:from-blue-500 hover:to-cyan-500 text-white text-lg font-bold py-2 px-4 rounded">
+                        class="p-2 rounded bg-gradient-to-r from-yellow-400 to-pink-500 hover:from-blue-500 hover:to-cyan-500">
                         Explore</a>
                 </div>
                 <div>
                     <a href="/files"
-                        class="bg-gradient-to-r from-cyan-400 to-green-500 hover:from-pink-500 hover:to-yellow-500 text-white text-lg font-bold py-2 px-4 rounded">
+                        class="p-2 rounded bg-gradient-to-r from-cyan-400 to-green-500 hover:from-pink-500 hover:to-yellow-500">
                         Sandbox</a>
                 </div>
                 <div>
@@ -90,7 +90,8 @@
 
 
 <!-- Hero Section -->
-<section id="home" class="text-gray-600 flex items-center justify-center min-h-screen fade-in">
+<section class="text-gray-600 flex items-center justify-center fade-in">
+    <!-- min-h-screen -->
     <div class="container text-left justify-center flex flex-wrap w-2/3">
 
         <!-- <div class="w-full md:w-1/2"> -->
@@ -181,7 +182,7 @@
 
 
 <!-- About Section -->
-<section id="about_" class="fade-in">
+<section id="about_" class="fade-in appear-from-bottom">
     <!-- p-5  -->
     <div class="container mx-auto text-center text-gray-600">
         <!-- <h2 class="text-4xl font-bold mb-4">About Us</h2> &lt; -->

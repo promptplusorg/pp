@@ -1532,6 +1532,10 @@ video {
     display: inline-block;
   }
 
+  .sm\:w-auto {
+    width: auto;
+  }
+
   .sm\:columns-2 {
     -moz-columns: 2;
          columns: 2;
@@ -1629,6 +1633,10 @@ video {
     width: 66.666667%;
   }
 
+  .md\:w-4\/5 {
+    width: 80%;
+  }
+
   .md\:flex-wrap {
     flex-wrap: wrap;
   }
@@ -1657,6 +1665,16 @@ video {
   .md\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 
