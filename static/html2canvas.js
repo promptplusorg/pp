@@ -7814,7 +7814,7 @@
             ? parseColor(context, backgroundColorOverride)
             : backgroundColorOverride === null
                 ? COLORS.TRANSPARENT
-                : 0xffffffff;
+                : COLORS.TRANSPARENT;
         return element === ownerDocument.documentElement
             ? isTransparent(documentBackgroundColor)
                 ? isTransparent(bodyBackgroundColor)

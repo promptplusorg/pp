@@ -67,6 +67,11 @@ async def read_item(request: Request):
     return templates.TemplateResponse("pp.html", {"request": request})
 
 
+@app.post("/contact", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("logo.html", {"request": request})
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     """Route to initiate Google OAuth2 login."""
@@ -184,11 +189,6 @@ async def list_files_route(request: Request):
             "elapsed_time": 0,
         }
         return templates.TemplateResponse("files.html", {"request": request, "fetched_data": fetched_data_})
-
-
-@app.post("/contact", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("logo.html", {"request": request})
 
 
 @app.websocket("/ws")
