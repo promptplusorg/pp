@@ -1,5 +1,5 @@
 from .file_list import get_file_list
-from .utilities import convert_size
+from .utilities import convert_size, CLIENT_ID
 from .views import fetch_files_from_drive
 from .drive_operations import upload_file_to_drive
 from .google_auth_helpers import flow, credentials_to_dict, get_credentials_from_session
@@ -72,11 +72,19 @@ async def read_item(request: Request):
     return templates.TemplateResponse("logo.html", {"request": request})
 
 
+@app.get("/chat", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("chat.html", {"request": request})
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     """Route to initiate Google OAuth2 login."""
     authorization_url, _ = flow.authorization_url(prompt="consent")
-    return templates.TemplateResponse("index.html", {"request": request, "authorization_url": authorization_url})
+    return templates.TemplateResponse("index.html", {"request": request,
+                                                     "authorization_url": authorization_url,
+                                                     "CLIENT_ID": CLIENT_ID}
+                                      )
 
 
 @app.get("/login/")

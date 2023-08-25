@@ -1,39 +1,101 @@
 {% extends 'template.html' %}
 {% block content %}
 
-<!-- Hero Section -->
-<section id="home" class="text-gray-600 flex items-center justify-center min-h-screen fade-in">
-    <div class="container text-left justify-center flex flex-wrap w-4/5">
-        <div class="w-full md:w-1/2">
+<section
+    class="relative overflow-hidden bg-gradient-to-b from-blue-50 via-transparent to-transparent pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
+    <div class="relative isolate z-10">
+        <div
+            class="absolute -z-10 flex -translate-y-1/2 justify-center overflow-hidden inset-x-0 top-1/2 [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
+            <svg class="h-[60rem] w-[100rem] flex-none stroke-blue-600 opacity-20" aria-hidden="true">
+                <defs>
+                    <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6fe" width="200" height="200" x="50%" y="50%"
+                        patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
+                        <path d="M.5 200V.5H200" fill="none"></path>
+                    </pattern>
+                </defs>
+                <svg x="50%" y="50%" class="overflow-visible fill-blue-50">
+                    <path d="M-300 0h201v201h-201Z M300 200h201v201h-201Z" strokeWidth="0"></path>
+                </svg>
+                <rect width="100%" height="100%" strokeWidth="0" fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6fe)">
+                </rect>
+            </svg>
+        </div>
+    </div>
+
+    <div class="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 flex pt-6">
+
+        <div class="max-w-2xl mx-auto text-center">
+
+            <!-- <h1 class="text-2xl sm:text-4xl font-bold tracking-tight text-gray-900 ">
+                Infy<span class="text-[#20B2AA]">GPT</span> <br />
+                for providing better user experiences
+            </h1>
+            <h2 class="text-lg leading-8 text-gray-600 mt-6">
+                Instantly respond to queries from visitors using a chatbot that
+                has been trained on the information on your website.
+            </h2> -->
+
             <h2 class="text-5xl font-bold mb-4"><span class="gradient-text">Your DATA. Any GPT.</span></h2>
-            <p class="text-xl mb-4">Leverage cutting-edge AI tech to transform your data.<br>
-                Harness the power of GPT models and integrate them seamlessly.
+            <p class="text-xl text-gray-600 mb-4">Leverage cutting-edge AI tech to transform your data and<br>
+                integrate them seamelessly with you anywhere.
             </p>
-            <div class="flex gap-2 items-center mb-4">
+
+            <div class="flex gap-2 items-center justify-center">
                 <div>
                     <a href="#features"
-                        class="bg-gradient-to-r from-yellow-400 to-pink-500 hover:from-blue-500 hover:to-cyan-500 text-white text-xl font-bold py-2 px-4 rounded">
+                        class="bg-gradient-to-r from-yellow-400 to-pink-500 hover:from-blue-500 hover:to-cyan-500 text-white text-lg font-bold py-2 px-4 rounded">
                         Explore</a>
                 </div>
                 <div>
                     <a href="/files"
-                        class="bg-gradient-to-r from-cyan-400 to-green-500 hover:from-pink-500 hover:to-yellow-500 text-white text-xl font-bold py-2 px-4 rounded">
+                        class="bg-gradient-to-r from-cyan-400 to-green-500 hover:from-pink-500 hover:to-yellow-500 text-white text-lg font-bold py-2 px-4 rounded">
                         Sandbox</a>
                 </div>
                 <div>
-                    <!-- <a href="{{ authorization_url }}" -->
                     <a href="/login">
-                        <img src={{ url_for('static', path='/btn_google_signin_dark_focus_web.png' ) }}>
+                        <img class="rounded hover:shadow-md" src={{ url_for('static',
+                            path='/btn_google_signin_dark_normal_web.png' ) }}>
                     </a>
                 </div>
+
+                <!-- <div id="my-signin2"></div>
+                <script>
+                    function onSuccess(googleUser) {
+                        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                    }
+                    function onFailure(error) {
+                        console.log(error);
+                    }
+                    function renderButton() {
+                        gapi.signin2.render('my-signin2', {
+                            'scope': 'profile email',
+                            'width': 240,
+                            'height': 50,
+                            'longtitle': true,
+                            'theme': 'dark',
+                            'onsuccess': onSuccess,
+                            'onfailure': onFailure
+                        });
+                    }
+                </script>
+                <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
+
             </div>
+            <!-- <img src="{{ url_for('static', path='/proto.png') }}" alt="/promptpl.us&gt;"> -->
+        </div>
+    </div>
+
+</section>
 
 
-        </div>
-        <div class="w-full md:w-1/2">
-            <img src="{{ url_for('static', path='/proto.png') }}" alt="/promptpl.us&gt;"
-                class="w-full h-auto rounded mb-4">
-        </div>
+
+<!-- Hero Section -->
+<section id="home" class="text-gray-600 flex items-center justify-center min-h-screen fade-in">
+    <div class="container text-left justify-center flex flex-wrap w-2/3">
+
+        <!-- <div class="w-full md:w-1/2"> -->
+        <img src="{{ url_for('static', path='/proto.png') }}" alt="/promptpl.us&gt;" class="rounded-3xl">
+        <!-- </div> -->
     </div>
 </section>
 
@@ -124,9 +186,10 @@
     <div class="container mx-auto text-center text-gray-600">
         <!-- <h2 class="text-4xl font-bold mb-4">About Us</h2> &lt; -->
         <p class="text-xl mb-16">
-            <a href="https://promptpl.us" class="text-yellow-400 font-bold">
+            <a href="https://promptpl.us" class="font-bold">
                 <!-- <span class="text-red-400 font-extrabold">&lt;</span> -->
-                /prompt<span class="text-green-400">pl.us</span><span class="text-blue-400">&gt;</span>
+                /<span class="text-orange-500 ">prompt</span><span class="text-[#20B2AA]">pl.us</span><span
+                    class="text-blue-500 font-extrabold">&gt;</span>_
             </a>
             transforming businesses and lives with AI and data.<br>
             We are a team of passionate data scientists, engineers, and researchers, specialized in providing tailored

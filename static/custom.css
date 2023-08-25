@@ -61,7 +61,7 @@
     background: linear-gradient(90deg, #7209d4, #2832d4 33%, #00a5b2);
     -webkit-background-clip: text;
     color: transparent;
-    font-size: 40px;
+    /* font-size: 50px; */
 }
 
 
