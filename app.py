@@ -74,7 +74,7 @@ async def read_item(request: Request):
 
 @app.get("/chat", response_class=HTMLResponse)
 async def read_item(request: Request):
-    return templates.TemplateResponse("chat.html", {"request": request})
+    return templates.TemplateResponse("chatline.html", {"request": request})
 
 
 @app.get("/", response_class=HTMLResponse)

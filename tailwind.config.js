@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./templates/*.{html,js}'],
+  darkMode: 'class',
+  content: ['./templates/*.{html,js}', 'node_modules/preline/dist/*.js'],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('preline/plugin'),
+  ],
 }
 

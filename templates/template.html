@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id" content="{CLIENT_ID}">
@@ -9,15 +10,12 @@
     <title>/promptpl.us> Your personal Generative AI Consultant</title>
 
     <script src="{{ url_for('static', path='/aos.js') }}"></script>
-
     <script src="{{ url_for('static', path='/afb.js') }}"></script>
-
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', path='/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ url_for('static', path='/site.webmanifest') }}">
-
 
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" /> -->
 
@@ -28,34 +26,20 @@
 
     <link href="{{ url_for('static', path='/custom.css') }}" rel="stylesheet">
 
-
 </head>
 
 <body class="bg-gray-100 relative">
-
-    <div class="colorBackground absolute"></div>
-    <div class="colorBackgroundBottom absolute"></div>
-
+    <!-- pt-3 -->
+    <!-- pb-3 -->
     <div
-        class="fixed z-30 sm:w-4/5 sm:rounded-3xl shadow border border-gray-100 backdrop-blur-lg inset-x-0 top-0 mx-auto py-3 md:top-6">
+        class="p-3 fixed z-30 sm:w-4/5 sm:rounded-3xl shadow border border-gray-100 backdrop-blur-lg inset-x-0 top-0 mx-auto md:top-6">
         <div class="px-4">
             <div class="flex flex-wrap items-center justify-between font-semibold text-gray-600">
-                <!-- <div class="flex shrink-0"> -->
-                <!-- <a class=" flex items-center gap-1"> -->
 
-                <div class="w-full sm:w-auto flex justify-center">
-                    <a href="https://promptpl.us" class="font-bold text-4xl">
-                        <!-- <span class="text-red-400 font-extrabold">&lt;</span> -->
-                        /<span class="text-yellow-400">prompt</span><span class="text-[#20B2AA]">pl.us</span>&gt;_
-                        <!-- <span class="text-blue-500 font-extrabold">&gt;</span> -->
-                    </a>
-                </div>
+                {% from 'logo_div.html' import logo %}
+                {{ logo(4) }}
 
-                <!-- </a> -->
-                <!-- </div> -->
-                <!-- <div class="hidden md:flex md:items-center md:justify-center md:gap-5"></div> -->
-                <!-- <div class="flex items-center justify-end sm:gap-3 font-semibold text-gray-600"> -->
-                <div class="w-full sm:w-auto flex items-center justify-center font-semibold text-gray-600 space-x-4">
+                <div class="w-full sm:w-auto flex justify-center font-semibold text-gray-600 space-x-4">
 
                     <!-- <a href="#home" class="hover:bg-gray-200 rounded-lg px-3 pb-1">Home</a> -->
 

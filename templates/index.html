@@ -1,6 +1,9 @@
 {% extends 'template.html' %}
 {% block content %}
 
+<div class="colorBackground absolute"></div>
+<div class="colorBackgroundBottom absolute"></div>
+
 <section id="home"
     class="relative overflow-hidden bg-gradient-to-b from-blue-50 via-transparent to-transparent pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
     <div class="relative isolate z-10">
@@ -149,7 +152,6 @@
 <section id="about" class="text-gray-600 flex items-center justify-center fade-in p-8">
     <!-- p-5 min-h-screen -->
 
-
     <div class="container mx-auto text-gray-600">
         <h2 class="text-4xl font-bold mb-16 text-center appear-from-bottom">About Us</h2>
         <!-- <p class="mb-8 text-center appear-from-bottom">
@@ -157,10 +159,10 @@
             Explore some of the key features below:
         </p> -->
 
-        <div class="appear-from-bottom flex flex-wrap justify-between mb-16">
+        <div class="appear-from-bottom flex flex-wrap justify-between">
             <div class="w-full md:w-1/2 flex justify-center">
                 <div class="w-4/5">
-                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926" class="w-full h-auto mb-8">
+                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb" class="w-full h-auto mb-4">
                     <!-- transform hover:scale-105 transition-all duration-300 -->
                 </div>
             </div>
@@ -168,7 +170,7 @@
                 <h3 class="text-4xl font-bold mb-4">
                     Our Vision:<br>Making AI widely accessible.
                 </h3>
-                <p class="text-2xl mb-4">
+                <p class="text-2xl">
                     We envision a world where technology is accessible for all<br>
                     We aim to democratize technology and drive innovation.<br>
                     We value innovation, collaboration, and improvement.<br>
@@ -180,19 +182,15 @@
     </div>
 </section>
 
-
 <!-- About Section -->
 <section id="about_" class="fade-in appear-from-bottom">
     <!-- p-5  -->
-    <div class="container mx-auto text-center text-gray-600">
+    <div class="container mx-auto">
         <!-- <h2 class="text-4xl font-bold mb-4">About Us</h2> &lt; -->
-        <p class="text-xl mb-16">
-            <a href="https://promptpl.us" class="font-bold">
-                <!-- <span class="text-red-400 font-extrabold">&lt;</span> -->
-                /<span class="text-orange-500 ">prompt</span><span class="text-[#20B2AA]">pl.us</span><span
-                    class="text-blue-500 font-extrabold">&gt;</span>_
-            </a>
-            transforming businesses and lives with AI and data.<br>
+
+        <p class="text-xl text-center text-gray-600">
+            {% from 'logo_div.html' import logo %}
+            {{ logo(1,"transforming businesses and lives with AI and data.") }}<br>
             We are a team of passionate data scientists, engineers, and researchers, specialized in providing tailored
             solutions for businesses.<br>
             Our team works closely with B2B clients to understand their unique needs and develop customized
@@ -200,12 +198,9 @@
             Whether you need to integrate GPT models into your systems or require a customized solution, our expertise
             can help you achieve your goals.<br>
         </p>
+
         <div class="flex flex-wrap justify-center p-5">
-            <div class="w-full md:w-1/3 p-5">
-                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb" alt="Contact Us"
-                    class="w-full h-auto rounded mb-4">
-            </div>
-            <div class="w-full md:w-2/3 p-5">
+            <div class="w-full md:w-1/2 p-5">
                 <div class="container mx-auto">
                     <p class="text-xl font-semibold text-center">Need customization for your specific use cases.
                         Let's Talk.
@@ -228,6 +223,10 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="w-full md:w-1/2 p-5">
+                <img src="https://images.unsplash.com/photo-1557683316-973673baf926" alt="Contact Us"
+                    class="w-full h-auto rounded mb-4">
             </div>
         </div>
     </div>
