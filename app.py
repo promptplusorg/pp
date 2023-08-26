@@ -77,6 +77,11 @@ async def read_item(request: Request):
     return templates.TemplateResponse("chatline.html", {"request": request})
 
 
+@app.get("/preline", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("preline.html", {"request": request})
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     """Route to initiate Google OAuth2 login."""
