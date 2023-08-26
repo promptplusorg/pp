@@ -162,20 +162,30 @@
         <div class="appear-from-bottom flex flex-wrap justify-between">
             <div class="w-full md:w-1/2 flex justify-center">
                 <div class="w-4/5">
-                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb" class="w-full h-auto mb-4">
+                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926" class="w-full h-auto mb-4">
                     <!-- transform hover:scale-105 transition-all duration-300 -->
                 </div>
             </div>
             <div class="w-full md:w-1/2">
-                <h3 class="text-4xl font-bold mb-4">
-                    Our Vision:<br>Making AI widely accessible.
-                </h3>
-                <p class="text-2xl">
-                    We envision a world where technology is accessible for all<br>
-                    We aim to democratize technology and drive innovation.<br>
-                    We value innovation, collaboration, and improvement.<br>
-                    We empower individuals and organizations to harness their data and leverage the power of GPT models.
+                <p class="text-xl font-semibold text-center">Let's talk about your ideas.
                 </p>
+                <form action="/contact" method="post" class="flex flex-wrap justify-center">
+                    <div class="w-full md:w-1/2 p-2">
+                        <input type="text" name="name" placeholder="Your Name" class="w-full p-2 rounded border">
+                    </div>
+                    <div class="w-full md:w-1/2 p-2">
+                        <input type="email" name="email" placeholder="Your Email" class="w-full p-2 rounded border">
+                    </div>
+                    <div class="w-full p-2">
+                        <textarea name="message" placeholder="Your Message" rows="5"
+                            class="w-full p-2 rounded border"></textarea>
+                    </div>
+                    <div class="w-full p-2">
+                        <button type="submit"
+                            class="w-full p-2 rounded text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500">
+                            Send Message</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -201,31 +211,24 @@
 
         <div class="flex flex-wrap justify-center">
             <div class="w-full md:w-1/2 p-5">
-                <div class="container mx-auto">
-                    <p class="text-xl font-semibold text-center">Need customization for your specific use cases.
-                        Let's Talk.
-                    </p>
-                    <form action="/contact" method="post" class="flex flex-wrap justify-center">
-                        <div class="w-full md:w-1/2 p-2">
-                            <input type="text" name="name" placeholder="Your Name" class="w-full p-2 rounded border">
-                        </div>
-                        <div class="w-full md:w-1/2 p-2">
-                            <input type="email" name="email" placeholder="Your Email" class="w-full p-2 rounded border">
-                        </div>
-                        <div class="w-full p-2">
-                            <textarea name="message" placeholder="Your Message" rows="5"
-                                class="w-full p-2 rounded border"></textarea>
-                        </div>
-                        <div class="w-full p-2">
-                            <button type="submit"
-                                class="w-full p-2 rounded text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500">
-                                Send Message</button>
-                        </div>
-                    </form>
-                </div>
+
+                <h3 class="text-4xl font-bold mb-4">
+                    Our Vision:<br>Making AI widely accessible.
+                </h3>
+                <p class="text-xl">
+                    <!-- We envision a world where technology is accessible for all<br> -->
+                    We aim to democratize technology and drive innovation.<br>
+                    We value innovation, collaboration, and improvement.<br>
+                    We empower individuals and organizations to harness their data and leverage the power of GPT models.
+                </p>
+
+                <!-- <div class="container mx-auto"> -->
+
+                <!-- </div> -->
+
             </div>
             <div class="w-full md:w-1/2 p-5">
-                <img src="https://images.unsplash.com/photo-1557683316-973673baf926" alt="Contact Us"
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb" alt="Contact Us"
                     class="w-full h-auto rounded">
             </div>
         </div>
