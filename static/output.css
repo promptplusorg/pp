@@ -2435,6 +2435,11 @@ video {
     border-radius: 1.5rem;
   }
 
+  .sm\:rounded-b-3xl {
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+  }
+
   .sm\:border {
     border-width: 1px;
   }
