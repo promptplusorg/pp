@@ -49,7 +49,7 @@
 </head>
 
 <body class="dark:bg-slate-900 dark:border-gray-700">
-  <script src="{{ url_for('static', path='/hs.theme-appearance.js') }}"></script>
+  <!-- <script src="{{ url_for('static', path='/hs.theme-appearance.js') }}"></script> -->
 
   {% from 'sidebar.html' import sb %}
   {{ sb("") }}
@@ -72,6 +72,9 @@
       <!-- End Title -->
 
       <ul class="mt-16 space-y-5">
+
+        <div id="logs"></div>
+
         {% from 'chatmsg.html' import bubble %}
         {{ bubble("") }}
       </ul>
@@ -86,6 +89,48 @@
 
   <script src="{{ url_for('static', path='/preline.js') }}"></script>
   <script src="{{ url_for('static', path='/dark.js') }}"></script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // const socket = new WebSocket(`wss://linkpay.to/ws`);
+      const socket = new WebSocket(`wss://promptpl.us/chat`);
+
+      socket.onopen = (event) => {
+        console.log("WebSocket Connected");
+      };
+
+      socket.onmessage = async (event) => {
+        const logDiv = document.getElementById("logs");
+        logDiv.innerHTML += `<p>${event.data}</p>`;
+
+        // logDiv.innerHTML += `<p>${event.data.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`;
+
+        console.log(event.data);  // Added for debugging
+
+        if (event.data === "Fetching completed!") {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          window.location.href = "/files/";
+        }
+      };
+
+      socket.onclose = (event) => {
+        if (event.wasClean) {
+          console.log(`Connection closed cleanly, code=${event.code}, reason=${event.reason}`);
+        } else {
+          console.log('Connection died');
+        }
+      };
+
+      socket.onerror = (error) => {
+        console.error(`Error: ${error.message}`);
+      };
+
+      document.getElementById("scanDriveBtn").addEventListener("click", function () {
+        socket.send(document.getElementById("text").value);
+      });
+    });
+  </script>
 
 </body>
 
