@@ -159,8 +159,19 @@
             Explore some of the key features below:
         </p> -->
 
-        <div class="appear-from-bottom flex flex-wrap justify-between">
-            <div class="w-full md:w-1/2 flex justify-center">
+        <p class="py-8 text-xl text-center text-gray-600">
+            We are a team of passionate data scientists, engineers, and researchers, specialized in providing tailored
+            solutions for businesses.<br>
+            Our team works closely with B2B clients to understand their unique needs and develop customized
+            solutions that align with their goals.<br>
+            Whether you need to integrate GPT models into your systems or require a customized solution, our expertise
+            can help you achieve your goals.<br>
+            {% from 'logo_div.html' import logo %}
+            {{ logo(1,"transforming businesses and lives with AI and data.") }}
+        </p>
+
+        <div class="appear-from-bottom flex flex-wrap items-center justify-between">
+            <div class="py-8 w-full md:w-1/2 flex justify-center">
                 <div class="w-4/5">
                     <img src="https://images.unsplash.com/photo-1557683316-973673baf926" class="w-full h-auto mb-4">
                     <!-- transform hover:scale-105 transition-all duration-300 -->
@@ -193,23 +204,12 @@
 </section>
 
 <!-- About Section -->
-<section id="about_" class="fade-in appear-from-bottom">
+<section id="about_" class="fade-in appear-from-bottom text-gray-600">
     <!-- p-5  -->
     <div class="container mx-auto">
         <!-- <h2 class="text-4xl font-bold mb-4">About Us</h2> &lt; -->
 
-        <p class="py-16 text-xl text-center text-gray-600">
-            We are a team of passionate data scientists, engineers, and researchers, specialized in providing tailored
-            solutions for businesses.<br>
-            Our team works closely with B2B clients to understand their unique needs and develop customized
-            solutions that align with their goals.<br>
-            Whether you need to integrate GPT models into your systems or require a customized solution, our expertise
-            can help you achieve your goals.<br>
-            {% from 'logo_div.html' import logo %}
-            {{ logo(1,"transforming businesses and lives with AI and data.") }}
-        </p>
-
-        <div class="flex flex-wrap justify-center">
+        <div class="flex flex-wrap items-center justify-center">
             <div class="w-full md:w-1/2 p-5">
 
                 <h3 class="text-4xl font-bold mb-4">
