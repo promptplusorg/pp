@@ -106,7 +106,7 @@
 <!-- Features Section -->
 <section id="features" class="p-8">
     <div class="container mx-auto text-gray-600 p-8">
-        <h2 class="text-4xl font-bold mb-4 text-center appear-from-bottom">Innovative Features</h2>
+        <h2 class="text-4xl font-bold mb-4 text-center appear-from-bottom p-8">Innovative Features</h2>
         <p class="mb-8 text-center appear-from-bottom">
             Exprerience the features of our platform designed to be instantly connected.
         </p>
@@ -149,11 +149,11 @@
 
 <!-- Vision Section -->
 <!-- bg-gradient-to-l from-purple-400 to-blue-500  text-white -->
-<section id="about" class="text-gray-600 flex items-center justify-center fade-in p-8">
+<section id="about" class="text-gray-600 flex items-center justify-center fade-in pt-28">
     <!-- p-5 min-h-screen -->
 
     <div class="container mx-auto text-gray-600">
-        <h2 class="text-4xl font-bold mb-16 text-center appear-from-bottom">About Us</h2>
+        <h2 class="text-4xl font-bold mb-8 text-center appear-from-bottom">About Us</h2>
         <!-- <p class="mb-8 text-center appear-from-bottom">
             Our platform offers a wide range of features designed to be connected instantly on the fly.<br>
             Explore some of the key features below:
@@ -188,18 +188,18 @@
     <div class="container mx-auto">
         <!-- <h2 class="text-4xl font-bold mb-4">About Us</h2> &lt; -->
 
-        <p class="text-xl text-center text-gray-600">
-            {% from 'logo_div.html' import logo %}
-            {{ logo(1,"transforming businesses and lives with AI and data.") }}<br>
+        <p class="py-16 text-xl text-center text-gray-600">
             We are a team of passionate data scientists, engineers, and researchers, specialized in providing tailored
             solutions for businesses.<br>
             Our team works closely with B2B clients to understand their unique needs and develop customized
             solutions that align with their goals.<br>
             Whether you need to integrate GPT models into your systems or require a customized solution, our expertise
             can help you achieve your goals.<br>
+            {% from 'logo_div.html' import logo %}
+            {{ logo(1,"transforming businesses and lives with AI and data.") }}
         </p>
 
-        <div class="flex flex-wrap justify-center p-5">
+        <div class="flex flex-wrap justify-center">
             <div class="w-full md:w-1/2 p-5">
                 <div class="container mx-auto">
                     <p class="text-xl font-semibold text-center">Need customization for your specific use cases.
@@ -226,7 +226,7 @@
             </div>
             <div class="w-full md:w-1/2 p-5">
                 <img src="https://images.unsplash.com/photo-1557683316-973673baf926" alt="Contact Us"
-                    class="w-full h-auto rounded mb-4">
+                    class="w-full h-auto rounded">
             </div>
         </div>
     </div>
