@@ -3,6 +3,13 @@
 
 
 
+  <!-- JS Implementing Plugins -->
+  <!-- <script src="./preline_files/preline.js.download"></script>
+  <script src="./preline_files/prism.js.download"></script> -->
+
+
+
+
 <div class="flex items-center justify-between pt-4 pr-4 pl-7">
 
             <!-- Sidebar Toggle -->
