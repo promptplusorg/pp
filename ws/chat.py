@@ -1,23 +1,24 @@
 from string import Template
-# from fastapi.templating import Jinja2Templates
-import os
-import logging
-
-from fastapi.websockets import WebSocket
-
 from fastapi import APIRouter
-router = APIRouter()
-
+from fastapi.websockets import WebSocket
+import logging
+import os
 print(os.getcwd())
 
-chat = open("pp/templates/chatbot.html", "r")
-src = Template(chat.read())
-print(src)
+router = APIRouter()
 
 # with open('foo.txt', 'r') as f:
 #     src = Template(f.read())
 #     result = src.substitute(d)
 #     print(result)
+
+chatuser = open("pp/templates/chatuser.html", "r")
+chatuser = Template(chatuser.read())
+print(chatuser)
+
+chatbot = open("pp/templates/chatbot.html", "r")
+chatbot = Template(chatbot.read())
+print(chatbot)
 
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # print("BASE_DIR", BASE_DIR)
@@ -27,9 +28,8 @@ print(src)
 # # templates = Jinja2Templates(directory="pp/templates")
 # print("templates", templates)
 
+
 # @router.websocket_route("/ws")
-
-
 @router.websocket_route("/chatline")
 async def websocket_endpoint_chatline(websocket: WebSocket):
 
@@ -64,17 +64,7 @@ async def websocket_endpoint_chatline(websocket: WebSocket):
             data = await websocket.receive_text()
             logging.info(f"Received WebSocket message: {data}")
 
-            # prompt =
-            # prompt = "<h1>"+data+"</h1>"
-            # prompt = f"""<li class="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-            # <span class="flex-shrink-0 inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full border-2 border-yellow-400">
-            # <span class="leading-none font-extrabold text-sm text-yellow-400">>_</span></span>
-            # <div class="space-y-3 font-medium text-gray-800 dark:text-white">{data}</div></li>"""
-
-            # await websocket.send_text(templates.TemplateResponse("chatbot.html", {"data": data}))
-            # await websocket.send_text(templates.TemplateResponse("chatbot.html",  {"request": request, "data": data}))
-
-            prompt = src.substitute({"data": data})
+            prompt = chatuser.substitute({"data": data})
             print("prompt", prompt)
             await websocket.send_text(prompt)
 
@@ -88,12 +78,7 @@ async def websocket_endpoint_chatline(websocket: WebSocket):
                 # do you have embed files?
                 res = elon_musk_bot.query(text)
                 print("res", res)
-                # ref_fmt = res
-                # ref_fmt = "<h1>"+res+"</h1>"
-                ref_fmt = f"""<li class="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-            <span class="flex-shrink-0 inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full border-2 border-green-500">
-            <span class="leading-none font-extrabold text-sm text-green-500">id</span></span>
-            <div class="space-y-3 font-medium text-gray-800 dark:text-white">{res}</div></li>"""
+                ref_fmt = chatbot.substitute({"res": res})
                 await websocket.send_text(ref_fmt)
             except:
                 await websocket.send_text(res)

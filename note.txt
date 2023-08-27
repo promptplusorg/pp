@@ -3,6 +3,18 @@
 
 
 
+
+            # prompt =
+            # prompt = "<h1>"+data+"</h1>"
+            # prompt = f"""<li class="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
+            # <span class="flex-shrink-0 inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full border-2 border-yellow-400">
+            # <span class="leading-none font-extrabold text-sm text-yellow-400">>_</span></span>
+            # <div class="space-y-3 font-medium text-gray-800 dark:text-white">{data}</div></li>"""
+
+            # await websocket.send_text(templates.TemplateResponse("chatbot.html", {"data": data}))
+            # await websocket.send_text(templates.TemplateResponse("chatbot.html",  {"request": request, "data": data}))
+
+
   <!-- JS Implementing Plugins -->
   <!-- <script src="./preline_files/preline.js.download"></script>
   <script src="./preline_files/prism.js.download"></script> -->
